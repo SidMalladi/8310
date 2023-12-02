@@ -1,23 +1,56 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import LanguageSelectionScreen from './Components/LanguageSelectionScreen';
+import IntroductionScreen from './Components/IntroductionScreen';
+import NameInputScreen from './Components/NameInputScreen';
+import ScenarioSelectionScreen from './Components/ScenarioSelectionScreen';
+import FeedbackScreen from './Components/FeedbackScreen';
 import './App.css';
 
 function App() {
+  const [currentScreen, setCurrentScreen] = React.useState('languageSelection');
+
+  const handleLanguageSelect = (language) => {
+    // Save the selected language and show the next screen
+    setCurrentScreen('introduction');
+  };
+
+  const handleIntroComplete = () => {
+    setCurrentScreen('nameInput');
+  };
+
+  const handleNameSubmitted = (name) => {
+    // Save the name and show the next screen
+    setCurrentScreen('scenarioSelection');
+  };
+
+  const handleScenarioSelect = (scenario) => {
+    // Save the scenario and show the next screen
+    setCurrentScreen('feedback');
+  };
+
+  const handleFeedbackComplete = () => {
+    // Go back to the scenario selection or to the next step
+    setCurrentScreen('scenarioSelection');
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {currentScreen === 'languageSelection' && (
+        <LanguageSelectionScreen onLanguageSelect={handleLanguageSelect} />
+      )}
+      {currentScreen === 'introduction' && (
+        <IntroductionScreen onIntroComplete={handleIntroComplete} />
+      )}
+      {currentScreen === 'nameInput' && (
+        <NameInputScreen onNameSubmitted={handleNameSubmitted} />
+      )}
+      {currentScreen === 'scenarioSelection' && (
+        <ScenarioSelectionScreen onScenarioSelect={handleScenarioSelect} />
+      )}
+      {currentScreen === 'feedback' && (
+        <FeedbackScreen onFeedbackComplete={handleFeedbackComplete} />
+      )}
+      {/* Add other screens as necessary */}
     </div>
   );
 }

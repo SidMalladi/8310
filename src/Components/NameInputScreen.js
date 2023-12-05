@@ -14,7 +14,8 @@ function NameInputScreen({ onNameSubmitted }) {
           onChange={(e) => setName(e.target.value)}
           placeholder="Say your name"
         />
-                <img src={micIcon} alt="Maria" style={{ maxWidth: '50px', height: 'auto' }}/>
+        <div><img src={micIcon} alt="Maria" style={{ maxWidth: '50px', height: 'auto' }}/></div>
+                
         <div>        <button onClick={() => onNameSubmitted(name)}>Submit</button></div>
       </div>
     );

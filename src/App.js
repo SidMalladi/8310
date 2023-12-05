@@ -4,6 +4,7 @@ import IntroductionScreen from './Components/IntroductionScreen';
 import NameInputScreen from './Components/NameInputScreen';
 import ScenarioSelectionScreen from './Components/ScenarioSelectionScreen';
 import FeedbackScreen from './Components/FeedbackScreen';
+import QuizScreen from './Components/QuizScreen';
 import './App.css';
 
 function App() {
@@ -24,13 +25,25 @@ function App() {
   };
 
   const handleScenarioSelect = (scenario) => {
-    // Save the scenario and show the next screen
-    setCurrentScreen('feedback');
+    if (scenario === 'Lets take a Quiz') {
+      setCurrentScreen('quiz'); 
+    } else {
+      // Handle other scenarios
+      setCurrentScreen(scenario);
+  }
   };
 
   const handleFeedbackComplete = () => {
     // Go back to the scenario selection or to the next step
     setCurrentScreen('scenarioSelection');
+  };
+
+  const handleQuizSelect = (scenario) => {
+    if (scenario === 'Lets take a Quiz') {
+      setCurrentScreen('quiz');
+    } else {
+      // Handle other scenarios
+    }
   };
 
   return (
@@ -49,6 +62,9 @@ function App() {
       )}
       {currentScreen === 'feedback' && (
         <FeedbackScreen onFeedbackComplete={handleFeedbackComplete} />
+      )}
+      {currentScreen === 'quiz' && (
+        <QuizScreen onFinishClick={handleFeedbackComplete}/>
       )}
       {/* Add other screens as necessary */}
     </div>
